@@ -1,0 +1,11 @@
+header{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+header>img{
+    width: 15%;
+    object-fit: contain;
+}
