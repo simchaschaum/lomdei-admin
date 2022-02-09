@@ -21,5 +21,6 @@ const firebaseConfig = {
 const fbApp = initializeApp(firebaseConfig);
 
 export const db = getFirestore();
+console.log(db)
 
 export default fbApp;

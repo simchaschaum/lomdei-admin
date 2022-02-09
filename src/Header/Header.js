@@ -2,18 +2,13 @@ import logo from './lomdei_logo.png';
 import './Header.css';
 import { getAuth, signOut } from "firebase/auth";
 import { useContext } from 'react';
-import { LoginStateContext } from '../App';
+import { StateContext } from '../App';
 import { useEffect } from 'react/cjs/react.development';
 
 const Header = () => {
-    const {user} = useContext(LoginStateContext);
+    const {user} = useContext(StateContext);
 
     const auth = getAuth();
-    useEffect(()=>{
-        if(user){
-            console.log(user)
-        } 
-    },[user])
     
     const logOut = () => {
         signOut(auth)
@@ -31,7 +26,7 @@ const Header = () => {
             </div>
             {user ? 
                 <div>
-                    <h4>Welcome, {user.email}!</h4>
+                    <h4>Welcome, {user.displayName ? user.displayName : user.email}!</h4>
                     <button onClick={logOut}>Log out</button>
                 </div>
                 : null}

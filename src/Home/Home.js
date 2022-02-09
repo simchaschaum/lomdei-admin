@@ -2,13 +2,13 @@ import { NavLink } from "react-router-dom";
 import Loginform from "../Loginform/Loginform";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useContext } from "react";
-import { LoginStateContext } from "../App";
+import { StateContext } from "../App";
 
 
 const Home = () => {
 
     const auth = getAuth();
-    const {loggedIn, user} = useContext(LoginStateContext);
+    const {loggedIn, user, categories} = useContext(StateContext);
 
     const register = (email, password) => {
         signInWithEmailAndPassword(auth, email, password)

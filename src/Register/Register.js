@@ -1,17 +1,20 @@
 import Loginform from "../Loginform/Loginform";
 import { NavLink, useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from '../firebase/firebase';
 
 const Register = ()=>{
-
-    const authorizedEmails = ["rabbischaum@lomdei.com", "someone@useSignInWithYahoo.com"]  // Eventually this will be in the database
 
     const auth = getAuth();
     const googleProvider = new GoogleAuthProvider();
 
     const navigate = useNavigate();
 
-    const register = (email,password) => {
+    const register = async (email,password) => {
+        const usersRaw = await getDocs(collection(db,"users"));
+        const authorizedEmails = [];
+        usersRaw.forEach(doc => authorizedEmails.push(doc.data().email));    
         if(authorizedEmails.includes(email)){
             createUserWithEmailAndPassword(auth,email, password)
             .then(userInfo => {
