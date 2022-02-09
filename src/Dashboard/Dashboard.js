@@ -19,13 +19,19 @@ const Dashboard = ()=> {
     useEffect(()=>console.log(editor),[editor]);
     useEffect(()=>console.log(key),[key]);
 
+    useEffect(()=>{
+        if(category !== "Choose Category"){
+            getText()
+        } else {
+            clearText()
+        }
+    },[category])
 
     const setTheCategory = (e)=>{
         e.preventDefault();
         setCategory(e.target.value);
     }
-    const getText = async (e) => {
-        e.preventDefault();
+    const getText = async () => {
         const response = await getDoc(doc(db,"website-info",category));
         let obj = response.data();
         setContentArr(obj.content);
@@ -33,6 +39,9 @@ const Dashboard = ()=> {
         let date = new Date(obj.timeStamp.seconds*1000).toDateString();
         setTimeStamp(date);
         setKey(Object.keys(obj.content[0])[0]);
+    }
+    const clearText = () => {
+        setContentArr([]);
     }
 
     // MAKE SURE TO ADD ?rel=0 TO END OF EACH youtube URL!! 
@@ -288,30 +297,13 @@ const Dashboard = ()=> {
                         categories.map((cat,idx) => <option key={`${idx}`} value={cat}>{cat}</option>)
                     }
                 </select>
-                <button onClick={getText}>Get Text</button>
+                {/* <button onClick={getText}>Get Text</button> */}
             </label>
         </form>
         <div>
             <div>Last editor: {editor}</div>
             <div>Last edited: {timeStamp}</div>
             {displayAllText}
-            {/* {contentArr.map((item,index)=><div key={`k-${index}`}>
-                <label>{key}:
-                    {
-                    typeof item[key] === "object" ? 
-                    <div className="textAreaGroup">{
-                        Object.keys(item[key]).map((innerItem,idx)=>
-                            <div key={`ik-${idx}`}>
-                                <label>{innerItem}:
-                                    <textarea value={item[key][innerItem]}/>
-                                </label>
-                            </div>
-                        )
-                    }</div>
-                        : <textarea value={item[key]} />
-                    }
-                </label>
-            </div>)} */}
         </div>
         <button onClick={setTxt}>Set Text</button>
     </div>
