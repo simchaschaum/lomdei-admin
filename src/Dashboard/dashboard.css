@@ -3,3 +3,7 @@ textarea{
     /* margin: 0 auto 2.5% auto; */
     padding: 2.5%;
 }
+.textAreaGroup{
+    border: 2px blue solid;
+    margin-bottom: 5%;
+}
