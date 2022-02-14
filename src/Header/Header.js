@@ -1,23 +1,12 @@
 import logo from './lomdei_logo.png';
 import './Header.css';
-import { getAuth, signOut } from "firebase/auth";
 import { useContext } from 'react';
 import { StateContext } from '../App';
-import { useEffect } from 'react/cjs/react.development';
+import { logOut } from '../firebase/authentication';
 
 const Header = () => {
     const {user} = useContext(StateContext);
 
-    const auth = getAuth();
-    
-    const logOut = () => {
-        signOut(auth)
-            .then(()=>{
-                // console.log("signed out");
-                // loggedin status - false
-            })
-            .catch(error => console.log(error))
-    }
     return(
         <header>
             <img src={logo} alt="Lomdei logo"></img>

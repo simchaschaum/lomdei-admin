@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useForm, ValidationError } from '@formspree/react';
+import { useForm} from '@formspree/react';
 import "./loginform.css";
-const Loginform = ({register, registerWithGoogle, formState}) => {
+import {login, register, loginWithGoogle} from '../firebase/authentication';
+
+const Loginform = ({formState}) => {
 
     const [requestState, handleRequestSubmit] = useForm("mrgjplnv");
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
-
-    useEffect(()=>console.log(requestState),[requestState])
 
     if(requestState.succeeded){
         return(
@@ -29,7 +29,6 @@ const Loginform = ({register, registerWithGoogle, formState}) => {
         )
     }
     
-
     const handleChange = (e) => {
         switch(e.target.name){
             case "email":
@@ -42,33 +41,64 @@ const Loginform = ({register, registerWithGoogle, formState}) => {
                 setMessage(e.target.value)
         }
     }
-    const handleSubmit = (e) => {
+    const handleLogin = (e) => {
+        e.preventDefault();
+        login(email,password);
+        clear()
+    }
+    const handleRegister = (e) => {
         e.preventDefault();
         register(email,password);
+        clear()
+    }
+
+    const clear = () => {
         setEmail("");
         setPassword("");
         setMessage("");
     }
 
-    const placeholder = formState === "Request" ? "Type your message here." : "At least 6 characters";
-    const type = formState === "Request" ? "text" : "password";
-    const label = formState === "Request" ? "Message:" : "Password:";
-    const name = formState === "Request" ? "Message" : "Massword";
-    const value = formState === "Request" ? message : password;
-    const submit = formState === "Request" ? handleRequestSubmit : handleSubmit;
-
+    const btnControl = {
+        "Request": {
+            placeholder: "Type your message here.",
+            type: "text",
+            label: "Message",
+            name: "message",
+            value: message,
+            submit: handleRequestSubmit
+        },
+        "Log in": {
+            placeholder: "At least 6 characters",
+            type: "password",
+            label: "Password",
+            name: "password",
+            value: password,
+            submit: handleLogin,
+            google: loginWithGoogle
+        },
+        "Register": {
+            placeholder: "At least 6 characters",
+            type: password,
+            label: "Password",
+            name: "password",
+            value: password,
+            submit: handleRegister,
+            google: loginWithGoogle
+        }
+    }
+       
     return(
         <div className="login-outer-div">
-            <form className="login-form" onSubmit={submit}>
+            <form className="login-form" onSubmit={btnControl[formState].submit}>
                 <label>Email:
                     <input required type={"email"} name={"email"} value={email} onChange={handleChange} placeholder="sample@sample.com"></input>
                 </label>
-                <label>{label}
-                    <input required type={type} name={name} value={value} onChange={handleChange} placeholder={placeholder}></input>
+                <label>{btnControl[formState].label}
+                    <input required type={btnControl[formState].type} name={btnControl[formState].name} value={btnControl[formState].value} onChange={handleChange} placeholder={btnControl[formState].placeholder}></input>
                 </label>
                 <input type={"submit"} readOnly value="Submit"></input>
             </form>
-            {formState === "Request" ? null: <button onClick={registerWithGoogle}>{formState} With Google</button>}
+            {formState !== "Request" && <button className="login-btn" onClick={btnControl[formState].google}>{formState} With Google</button>}
         </div>
     )
 }

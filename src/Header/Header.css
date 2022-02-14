@@ -24,7 +24,7 @@ header>div{
 }
 .user{
     display: flex;
-    /* flex-direction: row-reverse; */
+    flex-direction: column;
     align-items: center;
 }
 .user>button{
