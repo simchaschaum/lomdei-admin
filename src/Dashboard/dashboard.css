@@ -8,9 +8,8 @@
 }
 .info-group{
     width: 90%;
-    display: flex;
-    justify-content: center;
     margin: 0 auto 2.5% auto;
+    position: relative
 }
 .textAreaGroup{
     border: 0.5px black solid;
@@ -38,6 +37,10 @@ textarea{
 .changes-btns{
     display: inline-block;
     position: absolute;
+}
+.add-delete{
+    position: relative;
+    bottom: 20px
 }
 
 

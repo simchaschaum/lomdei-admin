@@ -60,10 +60,35 @@ const Dashboard = ()=> {
         setChanged(true);
     }
 
+    const deleteSection = (index) => {
+        if(window.confirm("Are you sure you want to delete this section?")){
+            let arr = contentArr;
+            arr.splice(index,1);
+            setContentArr([...arr]);
+        }
+    }
+
+    const addSection = (index) => {
+        let arr = contentArr;
+        let obj;
+        if(typeof contentArr[index][key] === "object"){
+            let keys = Object.keys(contentArr[index][key]);
+            obj = {[key]:{}}
+            keys.forEach(item => obj[key][item]="");
+        } else {
+            obj = {
+                [key] : ""
+            }
+        }
+        contentArr.splice(index+1,0, obj);
+        setContentArr([...arr]);
+    }
+
     const saveChanges = ()=>{
-        window.confirm("Are you sure??");
-        setInfo();
-        setChanged(false);
+        if(window.confirm("Are you sure you want to save changes to the database?")){
+            setInfo();
+            setChanged(false);
+        }
     }
 
     const setInfo = async (e) => {
@@ -82,8 +107,6 @@ const Dashboard = ()=> {
         }
     }
 
-    // MAKE SURE TO ADD ?rel=0 TO END OF EACH youtube URL!! 
-
     const displayAllText = 
     contentArr.map((item,index)=><div key={`k-${index}`}>
         <div className="info-group">
@@ -101,8 +124,10 @@ const Dashboard = ()=> {
                     </div>
                 )
             }</div>
-                : <textarea id="3" onChange={(event)=>handleChange(event,index)} value={item[key]} />
+                : <textarea id="3" onChange={(event)=>handleChange(event,index)} value={item[key]} /> 
             }
+            <button className="add-delete" onClick={()=>deleteSection(index)}>Delete Section</button>
+            <button className="add-delete" onClick={()=>addSection(index)}>Add Section Below</button>
         </div>
     </div>)
 
