@@ -4,8 +4,31 @@ header{
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid black;
+    padding: 1.5% 2.5%;
 }
 header>img{
     width: 15%;
+    min-width: 200px;
     object-fit: contain;
 }
+header>div{
+    min-width: 250px;
+}
+@media(max-width: 900px){
+    header{
+        flex-direction: column;
+    }
+    header>div:first-of-type{
+        order: 3
+    }
+}
+.user{
+    display: flex;
+    /* flex-direction: row-reverse; */
+    align-items: center;
+}
+.user>button{
+    height:fit-content;
+    cursor: pointer;
+}
+

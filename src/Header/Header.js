@@ -25,7 +25,7 @@ const Header = () => {
                 <h3>Lomdei.com Administrator Console</h3>
             </div>
             {user ? 
-                <div>
+                <div className='user'>
                     <h4>Welcome, {user.displayName ? user.displayName : user.email}!</h4>
                     <button onClick={logOut}>Log out</button>
                 </div>

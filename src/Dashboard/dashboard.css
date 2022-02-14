@@ -1,9 +1,43 @@
-textarea{
+.header{
+    width: 60%;
+    margin: 0 auto 50px auto;
+    position: relative
+}
+.info{
+    position: relative
+}
+.info-group{
     width: 90%;
-    /* margin: 0 auto 2.5% auto; */
-    padding: 2.5%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto 2.5% auto;
 }
 .textAreaGroup{
-    border: 2px blue solid;
-    margin-bottom: 5%;
+    border: 0.5px black solid;
+    width: 100%;
+    margin: 0 auto 5% auto;
 }
+.textAreaGroup>div{
+    display: flex;
+    justify-content: center;
+}
+label{
+    width: 90%;
+    margin-bottom: 2.5%;
+    font-weight: bold;
+}
+textarea{
+    width: 100%;
+    height: 100px;
+    padding: 0.5%;
+    box-shadow: 0 0 2.5px black;
+    resize: none;
+    overflow: auto;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.changes-btns{
+    display: inline-block;
+    position: absolute;
+}
+
+
