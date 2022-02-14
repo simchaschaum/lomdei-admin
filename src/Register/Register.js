@@ -59,9 +59,9 @@ const Register = ()=>{
         <div>
             <h1>Welcome to the Administrator Console for www.lomdei.com!</h1>
             <h4>If you are not yet authorized, please fill out this request form:</h4>
-            <Loginform formState={"request"}/>
+            <Loginform formState={"Request"}/>
             <h4>If you are already authorized, please register below:</h4>
-            <Loginform register={register} registerWithGoogle={registerWithGoogle} formState={"register"}/>
+            <Loginform register={register} registerWithGoogle={registerWithGoogle} formState={"Register"}/>
             <NavLink to='/'><h4>Already registered? Please log in.</h4></NavLink>
         </div>
     )

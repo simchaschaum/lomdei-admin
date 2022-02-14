@@ -1,0 +1,35 @@
+.login-outer-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.login-form{
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    margin: 0 auto;
+}
+.login-form label{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.login-form label>*,
+button,
+input{
+    height: 36px;
+}
+input{
+    width: 60%;
+}
+input[type=submit]{
+    width: 100%;
+    margin-bottom: 2.5%;
+}
+button{
+    width: 350px;
+    margin: 0 auto;
+}
+#request-success-msg{
+    color: red
+}
